@@ -1,6 +1,15 @@
 import random
 
 def scenario(tela):
+    def rock(p):
+        rz = random.randint(15)
+        p1 = (p[0] + 5*rz, p[1] -3*rz)
+        p2 = (p[0] + 5*rz, p[1] -3*rz)
+        p3 = (p[0], p[1])
+        p4 = (p[0], p[1])
+        p5 = (p[0], p[1])
+        p6 = (p[0], p[1])
+
     print("In Scenario")
 
     for i in range(800):
@@ -20,10 +29,14 @@ def scenario(tela):
             tela.point_1((rand_numberx, rand_numbery - 1), '#572626')
             tela.point_1((rand_numberx - 1, rand_numbery), '#572626')
 
+    sunPoint = (120,tela.size[1] - 120)
+    sunColor = "#FFD94F"
+    tela.circle(sunPoint, 100, 4, sunColor)
+    tela.fill(sunPoint, sunColor)
 
-    tela.line((0, 150),(tela.size[0], 150), 2, '#737373')
-    #tela.fill((1, 1), '#737373')
-    tela.fill((tela.size[0],1), '#737373')
+    tela.line((1, 275),(324,275), 1, '#737373')
+    tela.line((324,275), (420, 205), 1, '#737373')
+    tela.line((420,205), (tela.size[0], 205), 1, '#737373')
 
     tela.win.update()
     print("Out Scenario")

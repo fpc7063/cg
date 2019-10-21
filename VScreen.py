@@ -5,14 +5,14 @@ from create_scenario import *
 
 
 class VScreen():
-    def __init__(self,win, size):
+    def __init__(self, win, size):
         '''Size is a Tuplle(x,y)'''
-        self.matrix = [["#000000" for x in range(size[1]+1)] for y in range(size[0]+1)]
+        self.__matrix = [["#000000" for x in range(size[1] + 1)] for y in range(size[0] + 1)]
         self.win = win
         self.win.setCoords(0, 0, size[0], size[1])
         self.win.setBackground("black")
         self.size = size
-        scenario(self)
+        'scenario(self)'
 
 
         #making background
@@ -20,7 +20,7 @@ class VScreen():
             self.point_1()'''
 
     def point_1(self, p, color ='#000000'):
-        self.matrix[p[0]][p[1]] = color
+        self.__matrix[p[0]][p[1]] = color
         self.win.plot(p[0], p[1], color)
 
 
@@ -57,7 +57,6 @@ class VScreen():
             ****
              **
         '''
-
         self.point_1((p[0], p[1]), color)
         self.point_1((p[0] + 1, p[1]), color)
         self.point_1((p[0] + 2, p[1]), color)
@@ -80,14 +79,15 @@ class VScreen():
         x = p
         lista.append(x)
         while(len(lista) != 0):
-            if(color != self.matrix[x[0]][x[1]] and p[0] < self.size[0] and p[1] < self.size[1]):
+            high = (x[0] > 0 and x[1] > 0)
+            low = (x[0] < self.size[0] and x[1] < self.size[1])
+            if(color != self.__matrix[x[0]][x[1]] and high and low):
                 self.point_1(x, color)
                 lista.append((x[0] + 1, x[1]))
                 lista.append((x[0], x[1] + 1))
                 lista.append((x[0] - 1, x[1]))
                 lista.append((x[0], x[1] - 1))
             x = lista.pop(0)
-            print(x)
         print("Out Fill")
         self.win.update()
 
@@ -393,31 +393,27 @@ size=(1000,700)
 win = GraphWin("Batata", size[0], size[1], autoflush=False)
 tela = VScreen(win,size)
 
-'''coords = []
 
-x = win.getMouse()
-coords.append(getMouse(tela,x))
+pontos = []
+for i in range(3):
+    ponto = getMouse(tela,win.getMouse())
+    pontos.append(ponto)
+print(pontos)
 
-y = win.getMouse()
-tela.point_3((int(y.getX()),int(y.getY())),'#FFFFFF')
-y = (int(y.getX()), int(y.getY()))
-print(y)
+'''while(len(pontos) >= 2):
+    tela.line(pontos[0],pontos[1],4,'#FFFFFF')
+    x = pontos.pop(0)'''
 
-z = win.getMouse()
-tela.point_3((int(z.getX()),int(z.getY())),'#FFFFFF')
-z = (int(z.getX()), int(z.getY()))
-print(z)
-
-
-
-tela.line(x, y, 1, '#FFFFFF')
-tela.line(y, z, 1, '#FFFFFF')'''
+'''
+311 = (343^2)*a + 343*b + c
+328 = (343^2)*a + 343*b + c
+249 = (343^2)*a + 343*b + c
+'''
 
 
 
 win.getMouse()
 win.close()
-
 
 
 
