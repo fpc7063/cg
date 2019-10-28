@@ -1,3 +1,4 @@
+from testes import *
 from graphics import GraphWin
 import random
 from getMouse import *
@@ -12,7 +13,7 @@ class VScreen():
         self.win.setCoords(0, 0, size[0], size[1])
         self.win.setBackground("black")
         self.size = size
-        'scenario(self)'
+        scenario(self)
 
 
         #making background
@@ -381,42 +382,3 @@ class VScreen():
                 self.point_4((y + c[0], -x + c[1]), color)
         print("Out Circle")
         self.win.update()
-
-
-
-
-
-
-
-size=(1000,700)
-
-win = GraphWin("Batata", size[0], size[1], autoflush=False)
-tela = VScreen(win,size)
-
-
-pontos = []
-for i in range(3):
-    ponto = getMouse(tela,win.getMouse())
-    pontos.append(ponto)
-print(pontos)
-
-'''while(len(pontos) >= 2):
-    tela.line(pontos[0],pontos[1],4,'#FFFFFF')
-    x = pontos.pop(0)'''
-
-'''
-311 = (343^2)*a + 343*b + c
-328 = (343^2)*a + 343*b + c
-249 = (343^2)*a + 343*b + c
-'''
-
-
-
-win.getMouse()
-win.close()
-
-
-
-
-'''Caneta.fill((click.getX(),click.getY()),color_rgb(255,0,0))
-Caneta.fill((click.getX(),click.getY()),color_rgb(255,0,0))'''

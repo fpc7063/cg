@@ -34,9 +34,11 @@ def scenario(tela):
     tela.circle(sunPoint, 100, 4, sunColor)
     tela.fill(sunPoint, sunColor)
 
-    tela.line((1, 275),(324,275), 1, '#737373')
-    tela.line((324,275), (420, 205), 1, '#737373')
-    tela.line((420,205), (tela.size[0], 205), 1, '#737373')
+    tela.line((1, 275), (324, 275), 1, '#737373')
+    tela.line((324, 275), (420, 205), 1, '#737373')
+    tela.line((420, 205), (tela.size[0], 205), 1, '#737373')
+
+    tela.line((420, 205), (1, 275), '#737373')
 
     tela.win.update()
     print("Out Scenario")
