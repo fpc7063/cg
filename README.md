@@ -1,2 +1,2 @@
 # cg
-Materia de COmputacao Grafica
+Materia de Computacao Grafica

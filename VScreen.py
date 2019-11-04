@@ -3,7 +3,9 @@ from graphics import GraphWin
 import random
 from getMouse import *
 from create_scenario import *
-
+'''class ModuloLunar():
+    def __init__(self):
+        '''
 
 class VScreen():
     def __init__(self, win, size):
@@ -14,11 +16,7 @@ class VScreen():
         self.win.setBackground("black")
         self.size = size
         scenario(self)
-
-
-        #making background
-        '''for x in range(0,100):
-            self.point_1()'''
+        self.module = module(self)
 
     def point_1(self, p, color ='#000000'):
         self.__matrix[p[0]][p[1]] = color
@@ -90,7 +88,6 @@ class VScreen():
                 lista.append((x[0], x[1] - 1))
             x = lista.pop(0)
         print("Out Fill")
-        self.win.update()
 
 
 
@@ -251,7 +248,6 @@ class VScreen():
                         p = p + dY
                     y1 = y1 + yInc
                 self.point_4((x1, y1), color)
-        self.win.update()
         print("Out Line")
 
 
@@ -381,4 +377,3 @@ class VScreen():
                 self.point_4((-y + c[0], -x + c[1]), color)
                 self.point_4((y + c[0], -x + c[1]), color)
         print("Out Circle")
-        self.win.update()
