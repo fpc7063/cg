@@ -1,13 +1,20 @@
+from graphics import GraphWin
 from VScreen import *
 from getMouse import *
-#from testes import *
+# from testes import *
+from trajectory import trajectory
 
 
 size = (1000, 700)
 win = GraphWin("Batata", size[0], size[1], autoflush=False)
 tela = VScreen(win, size)
+module = Entity(tela, (100,100))
+trajectory_module = trajectory
 
+module.draw()
 
+while True:
+    break;
 
 
 
