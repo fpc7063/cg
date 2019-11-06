@@ -1,5 +1,6 @@
 import random
 from create_scenario import *
+from graphics import GraphWin
 
 
 class Entity:
@@ -18,8 +19,8 @@ class Entity:
 
     def __str__(self):
         entity = f'Main Coordenate: {self._coord_point}\n'
-        for x in range(0, self.size[0]):
-            for y in range(0, self.size[1]):
+        for x in range(0, self._size[0]):
+            for y in range(0, self._size[1]):
                 xy = (x + self._coord_point[0], y + self._coord_point[1])
                 entity += f'({xy[0]}, {xy[1]}: {self._matrix[xy[0]][xy[1]], })'
             entity += '\n'
@@ -37,20 +38,23 @@ class Entity:
             self.draw(self._coord_point[1] - 1)
 
     def undraw(self):
-        for x in range(0, self.size[0]):
-            for y in range(0, self.size[1]):
+        for x in range(0, self._size[0]):
+            for y in range(0, self._size[1]):
                 xy = (x + self._coord_point[0], y + self._coord_point[1])
-                color = self._Vs_entity.__matrix[xy[0]][xy[1]]
+                color = self._Vs_entity.get_point_color((xy[0], xy[1]))
                 self._Vs_entity.point_1((xy[0], xy[1]), color)
 
     def draw(self, new_cord_point):
         if self._on:
             self.undraw()
-        for x in range(0, self.size[0]):
-            for y in range(0, self.size[1]):
+        for x in range(0, self._size[0]):
+            for y in range(0, self._size[1]):
                 xy = (x + new_cord_point[0], y + new_cord_point[1])
                 color = self._matrix[x][y]
-                self._Vs_entity.point_1((xy[0], xy[1]), color)
+                self._Vs_entity.point_1_screen((xy[0], xy[1]), color)
+        self._coord_point = new_cord_point
+        self._on = True
+        self._Vs_entity.refresh()
 
 
 
@@ -59,15 +63,21 @@ class Entity:
 
 
 class VScreen():
-    def __init__(self, win, size):
-        '''Size is a Tuple(x,y)
-            Win is a GraphWin from graphics.py'''
+    def __init__(self, name, size):
+        """Size is a Tuple(x,y)
+            Win is a GraphWin from graphics.py"""
         self.__matrix = [["#000000" for y in range(size[1] + 1)] for x in range(size[0] + 1)]
-        self.win = win
+        self.win = win = GraphWin(name, size[0], size[1], autoflush=False)
         self.win.setCoords(0, 0, size[0], size[1])
         self.win.setBackground("black")
         self.size = size
         scenario(self)
+
+    def refresh(self):
+        self.win.update()
+
+    def get_point_color(self, p):
+        return self.__matrix[p[0]][p[1]]
 
     def __str__(self):
         vs = ''
@@ -78,15 +88,18 @@ class VScreen():
             vs = ''
         return 'Objeto printado!'
 
+    def point_1_screen(self, p, color='#000000'):
+        self.win.plot(p[0], p[1], color)
+
     def point_1(self, p, color='#000000'):
         self.__matrix[p[0]][p[1]] = color
         self.win.plot(p[0], p[1], color)
 
     def point_2(self, p, color='#000000'):
-        ''' # - ponto passado para a funcao
+        """ # - ponto passado para a funcao
         #*
         **
-        '''
+        """
 
         self.point_1((p[0] + 1, p[1]), color)
         self.point_1((p[0], p[1] + 1), color)
@@ -106,13 +119,13 @@ class VScreen():
         self.point_1((p[0] + 1, p[1]), color)
 
     def point_4(self, p, color="#000000"):
-        ''' # - ponto passado para a funcao
+        """ # - ponto passado para a funcao
 
              **
             *#**
             ****
              **
-        '''
+        """
         self.point_1((p[0], p[1]), color)
         self.point_1((p[0] + 1, p[1]), color)
         self.point_1((p[0] + 2, p[1]), color)
@@ -134,7 +147,7 @@ class VScreen():
         while (len(lista) != 0):
             high = (x[0] > 0 and x[1] > 0)
             low = (x[0] < self.size[0] and x[1] < self.size[1])
-            if (color != self.__matrix[x[0]][x[1]] and high and low):
+            if color != self.__matrix[x[0]][x[1]] and high and low:
                 self.point_1(x, color)
                 lista.append((x[0] + 1, x[1]))
                 lista.append((x[0], x[1] + 1))
@@ -145,7 +158,6 @@ class VScreen():
 
     # Linhas
     def line(self, p1, p2, size, color='#000000'):
-        print("In Line")
         if (size == 1):
             x1 = p1[0]
             y1 = p1[1]
@@ -293,7 +305,6 @@ class VScreen():
                         p = p + dY
                     y1 = y1 + yInc
                 self.point_4((x1, y1), color)
-        print("Out Line")
 
     # Circulo
     def circle(self, c, r, size, color="#000000"):

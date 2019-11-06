@@ -125,13 +125,3 @@ def scenario(tela):
 
 
 
-
-
-
-
-
-
-
-
-def module(tela):
-    pass

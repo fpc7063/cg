@@ -3,15 +3,17 @@ from VScreen import *
 from getMouse import *
 # from testes import *
 from trajectory import trajectory
+import time
 
 
 size = (1000, 700)
-win = GraphWin("Batata", size[0], size[1], autoflush=False)
-tela = VScreen(win, size)
-module = Entity(tela, (100,100))
+tela = VScreen("Batata", size)
+module = Entity(tela, (100, 100))
 trajectory_module = trajectory
 
-module.draw()
+for x in range(200, 300):
+    module.draw((x, x))
+    time.sleep(0.01)
 
 while True:
     break;
