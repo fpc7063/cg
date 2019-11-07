@@ -11,7 +11,7 @@ class VScreen:
         self.win.setCoords(0, 0, size[0], size[1])
         self.win.setBackground("black")
         self.size = size
-        scenario(self)
+        #scenario(self)
 
     def refresh(self):
         self.win.update()

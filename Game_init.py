@@ -5,16 +5,20 @@ from Scenario.trajectory import *
 import time
 
 
-size = (1000, 700)
+'''size = (1000, 700)
 tela = VScreen("Batata", size)
 module = Entity(tela, (100, 100))
 
 for t in range(0, 32):
     p = trajectory_to_2d(t)
     module.draw((p[0], p[1]))
-    time.sleep(0.5)
+    time.sleep(0.5)'''
 
-
+size = (50, 70)
+tela = VScreen("Modulo", size)
+tela.circle((25,35), 5, 1, '#0F0FFF')
+tela.circle((25,35), 4, 1, '#0000FF')
+tela.fill((25, 35), '#0000FF')
 
 
 
