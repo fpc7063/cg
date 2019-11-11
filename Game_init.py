@@ -4,21 +4,24 @@ from Objects.getMouse import *
 from Scenario.trajectory import *
 import time
 
-
-'''size = (1000, 700)
+# game initing
+size = (1000, 700)
 tela = VScreen("Batata", size)
-module = Entity(tela, (100, 100))
 
+# object declaration section
+module = Entity(tela, (200, 200))
+set_matrix_module(module)
+thruster = Entity(tela, (200, 200))
+set_matrix_thruster(thruster)
+module.append_object((thruster, (0, 200)))
+
+# time run
 for t in range(0, 32):
     p = trajectory_to_2d(t)
-    module.draw((p[0], p[1]))
-    time.sleep(0.5)'''
+    module.draw((p[0], p[1], p[2]))
+    tela.refresh()
+    time.sleep(0.01)
 
-size = (50, 70)
-tela = VScreen("Modulo", size)
-tela.circle((25,35), 5, 1, '#0F0FFF')
-tela.circle((25,35), 4, 1, '#0000FF')
-tela.fill((25, 35), '#0000FF')
 
 
 
@@ -32,8 +35,8 @@ tela.fill((25, 35), '#0000FF')
 for i in range(1):
     ponto = getMouse(tela, tela.win.getMouse())
     pontos.append(ponto)
-print(pontos)'''
-
+print(pontos)
+'''
 
 '''abc = curva()
 for x in range(839, 940 + 1):

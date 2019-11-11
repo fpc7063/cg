@@ -33,7 +33,7 @@ def trajectory_to_2d(time):
         ('70', 6111, 2222, 11550, True),
         ('75', 6111, 2222, 13200, True))
 
-    f = 620
+    f = 670
     x = t[time][1]
     y = t[time][2]
     z = t[time][3]
@@ -43,6 +43,9 @@ def trajectory_to_2d(time):
         y2 = int((f / x) * y)
 
     p = (y2, z2)
-    p0 = (95+p[0], 182+p[1])
+    print(p)
+    # (736, 518)
+    # (670, 335)
+    p0 = (76+p[0], 143+p[1], t[time][4])
     return p0
 
